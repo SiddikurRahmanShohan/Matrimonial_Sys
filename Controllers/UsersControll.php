@@ -24,7 +24,19 @@
     $err_mstat="";
 	$pass="";
     $err_pass="";
+	$err_db="";
+	$cpass="";
+	$err_cpass="";
 	$hasError = false;
+	
+	function numCharCheck($pas){
+	    for ($i = 0; $i <= strlen($pas)-1; $i++) {
+            if(is_numeric($pas[$i]))  {
+                return true;
+            }
+        }
+		return false;
+	}
 
     if(isset($_POST["addCanditate"])){
 		if(empty($_POST["name"])){
@@ -41,10 +53,25 @@
 		else{
 		    $dob = $_POST["dob"];
 	    }
+		if(empty($_POST["addrs"])){
+		    $err_addrs = "Address Requird";
+			$hasError = true;
+	    }
+		else{
+		    $addrs = $_POST["addrs"];
+	    }
 		if(empty($_POST["uname"])){
 		    $err_uname = "Username Requird";
 			$hasError = true;
 	    }
+		else if(strpos($_POST["uname"], " ") > 0){
+			$err_uname="Username can not have space";
+			$hasError = true;
+		}
+		else if(strlen($_POST["uname"]) <=3){
+			$err_uname="Username Must be greater than 3 character";
+			$hasError = true;
+		}
 		else{
 		    $uname = $_POST["uname"];
 	    }
@@ -60,7 +87,7 @@
 			$hasError = true;
 	    }
 		else{
-		    $mname = $_POST["fname"];
+		    $mname = $_POST["mname"];
 	    }
 		if(empty($_POST["gender"])){
 		    $err_gender = "Gender Requird";
@@ -73,15 +100,41 @@
 		    $err_nid = "NID Requird";
 			$hasError = true;
 	    }
+		else if(!numCharCheck($_POST["nid"])){
+			$err_nid="NID must be a number";
+			$hasError = true;
+		}
 		else{
-		    $nid = $_POST["gender"];
+		    $nid = $_POST["nid"];
 	    }
 		if(empty($_POST["phone"])){
 		    $err_phone = "Phone Number Requird";
 			$hasError = true;
 	    }
+		else if(!numCharCheck($_POST["phone"])){
+			$err_phone="Phone must be a number";
+			$hasError = true;
+		}
 		else{
 		    $phone = $_POST["phone"];
+	    }
+		if(empty($_POST["pass"])){
+		    $err_pass = "Password Requird";
+			$hasError = true;
+	    }
+		else{
+		    $pass = $_POST["pass"];
+	    }
+		if(empty($_POST["cpass"])){
+			$err_cpass="Confirm Password Required";
+			$hasError = true;
+		}
+		else if($_POST["cpass"] != $_POST["pass"]){
+			$err_cpass="Password doesen't match!";
+			$hasError = true;
+		}
+		else{
+		    $cpass = $_POST["cpass"];
 	    }
 		
 		if(!$hasError){
@@ -108,10 +161,25 @@
 		else{
 		    $dob = $_POST["dob"];
 	    }
+		if(empty($_POST["addrs"])){
+		    $err_addrs = "Address Requird";
+			$hasError = true;
+	    }
+		else{
+		    $addrs = $_POST["addrs"];
+	    }
 		if(empty($_POST["uname"])){
 		    $err_uname = "Username Requird";
 			$hasError = true;
 	    }
+		else if(strpos($_POST["uname"], " ") > 0){
+			$err_uname="Username can not have space";
+			$hasError = true;
+		}
+		else if(strlen($_POST["uname"]) <=3){
+			$err_uname="Username Must be greater than 3 character";
+			$hasError = true;
+		}
 		else{
 		    $uname = $_POST["uname"];
 	    }
@@ -127,7 +195,7 @@
 			$hasError = true;
 	    }
 		else{
-		    $mname = $_POST["fname"];
+		    $mname = $_POST["mname"];
 	    }
 		if(empty($_POST["gender"])){
 		    $err_gender = "Gender Requird";
@@ -140,16 +208,36 @@
 		    $err_nid = "NID Requird";
 			$hasError = true;
 	    }
+		else if(!numCharCheck($_POST["nid"])){
+			$err_nid="NID must be a number";
+			$hasError = true;
+		}
 		else{
-		    $nid = $_POST["gender"];
+		    $nid = $_POST["nid"];
 	    }
 		if(empty($_POST["phone"])){
 		    $err_phone = "Phone Number Requird";
 			$hasError = true;
 	    }
+		else if(!numCharCheck($_POST["phone"])){
+			$err_phone="Phone must be a number";
+			$hasError = true;
+		}
 		else{
 		    $phone = $_POST["phone"];
 	    }
+		if(empty($_POST["cpass"])){
+			$err_cpass="Confirm Password Required";
+			$hasError = true;
+		}
+		else if($_POST["cpass"] != $_POST["pass"]){
+			$err_cpass="Password doesen't match!";
+			$hasError = true;
+		}
+		else{
+		    $cpass = $_POST["cpass"];
+	    }
+		   
 		if(!$hasError){
 			$rs = updateCanditate($name,$dob,$uname,$fname,$mname,$mstat,$nid,$phone,$bg,$addrs,$gender,$pass);
 			if($rs === true){
@@ -160,7 +248,7 @@
 		
 	}
 	
-	else if(isset($_POST["deleteCanditate"])){
+	else if(isset($_POST["deleteUser"])){
 		if(empty($_POST["id"])){
 		    $err_id = "Id needed";
 			$hasError = true;
@@ -169,7 +257,7 @@
 			$id= $_POST["id"];
 		}
 		if(!$hasError){
-			$rs = deleteCanditate($id);
+			$rs = deleteUser($id);
 			if($rs === true){
 				header("Location: ManageCanditates.php");
 			}
@@ -177,33 +265,260 @@
 		}
 	}
 	
+	if(isset($_POST["updateUser"])){
+		if(empty($_POST["name"])){
+		    $err_name = "Name Requird";
+			$hasError = true;
+	    }
+		else{
+		    $name = $_POST["name"];
+	    }
+		if(empty($_POST["uname"])){
+		    $err_uname = "Username Requird";
+			$hasError = true;
+	    }
+		else if(strpos($_POST["uname"], " ") > 0){
+			$err_uname="Username can not have space";
+			$hasError = true;
+		}
+		else if(strlen($_POST["uname"]) <=3){
+			$err_uname="Username Must be greater than 3 character";
+			$hasError = true;
+		}
+		else{
+		    $uname = $_POST["uname"];
+	    }
+		
+		if(empty($_POST["phone"])){
+		    $err_phone = "Phone Number Requird";
+			$hasError = true;
+	    }
+		else if(!numCharCheck($_POST["phone"])){
+			$err_phone="Phone must be a number";
+			$hasError = true;
+		}
+		else{
+		    $phone = $_POST["phone"];
+	    }
+		if(empty($_POST["addrs"])){
+		    $err_addrs = "Address Requird";
+			$hasError = true;
+	    }
+		else{
+		    $addrs = $_POST["addrs"];
+	    }
+		
+		if(!$hasError){
+			$rs = updateUser($id,$name,$uname,$phone,$addrs);
+			if($rs === true){
+				header("Location: AdminHomePage.php");
+			}
+			$err_db = $rs;
+		}
+	}
+	
+	if(isset($_POST["addRegistrar"])){
+		if(empty($_POST["name"])){
+		    $err_name = "Name Requird";
+			$hasError = true;
+	    }
+		else{
+		    $name = $_POST["name"];
+	    }
+		
+		if(empty($_POST["addrs"])){
+		    $err_addrs = "Address Requird";
+			$hasError = true;
+	    }
+		else{
+		    $addrs = $_POST["addrs"];
+	    }
+		if(empty($_POST["uname"])){
+		    $err_uname = "Username Requird";
+			$hasError = true;
+	    }
+		else if(strpos($_POST["uname"], " ") > 0){
+			$err_uname="Username can not have space";
+			$hasError = true;
+		}
+		else if(strlen($_POST["uname"]) <=3){
+			$err_uname="Username Must be greater than 3 character";
+			$hasError = true;
+		}
+		else{
+		    $uname = $_POST["uname"];
+	    }
+			
+		if(empty($_POST["nid"])){
+		    $err_nid = "NID Requird";
+			$hasError = true;
+	    }
+		else if(!numCharCheck($_POST["nid"])){
+			$err_nid="NID must be a number";
+			$hasError = true;
+		}
+		else{
+		    $nid = $_POST["nid"];
+	    }
+		if(empty($_POST["phone"])){
+		    $err_phone = "Phone Number Requird";
+			$hasError = true;
+	    }
+		else if(!numCharCheck($_POST["phone"])){
+			$err_phone="Phone must be a number";
+			$hasError = true;
+		}
+		else{
+		    $phone = $_POST["phone"];
+	    }
+		if(empty($_POST["pass"])){
+		    $err_pass = "Password Requird";
+			$hasError = true;
+	    }
+		else{
+		    $pass = $_POST["pass"];
+	    }
+		if(empty($_POST["cpass"])){
+			$err_cpass="Confirm Password Required";
+			$hasError = true;
+		}
+		else if($_POST["cpass"] != $_POST["pass"]){
+			$err_cpass="Password doesen't match!";
+			$hasError = true;
+		}
+		else{
+		    $cpass = $_POST["cpass"];
+	    }
+		
+		if(!$hasError){
+			$rs = insertRegistrar($name,$uname,$nid,$phone,$addrs,$pass);
+			if($rs === true){
+				header("Location: ManageRegistrar.php");
+			}
+			$err_db = $rs;
+		}
+	}
+	
+	if(isset($_POST["updateRegistrar"])){
+		if(empty($_POST["name"])){
+		    $err_name = "Name Requird";
+			$hasError = true;
+	    }
+		else{
+		    $name = $_POST["name"];
+	    }
+		
+		if(empty($_POST["addrs"])){
+		    $err_addrs = "Address Requird";
+			$hasError = true;
+	    }
+		else{
+		    $addrs = $_POST["addrs"];
+	    }
+		if(empty($_POST["uname"])){
+		    $err_uname = "Username Requird";
+			$hasError = true;
+	    }
+		else if(strpos($_POST["uname"], " ") > 0){
+			$err_uname="Username can not have space";
+			$hasError = true;
+		}
+		else if(strlen($_POST["uname"]) <=3){
+			$err_uname="Username Must be greater than 3 character";
+			$hasError = true;
+		}
+		else{
+		    $uname = $_POST["uname"];
+	    }
+			
+		if(empty($_POST["nid"])){
+		    $err_nid = "NID Requird";
+			$hasError = true;
+	    }
+		else if(!numCharCheck($_POST["nid"])){
+			$err_nid="NID must be a number";
+			$hasError = true;
+		}
+		else{
+		    $nid = $_POST["nid"];
+	    }
+		if(empty($_POST["phone"])){
+		    $err_phone = "Phone Number Requird";
+			$hasError = true;
+	    }
+		else if(!numCharCheck($_POST["phone"])){
+			$err_phone="Phone must be a number";
+			$hasError = true;
+		}
+		else{
+		    $phone = $_POST["phone"];
+	    }
+		if(empty($_POST["pass"])){
+		    $err_pass = "Password Requird";
+			$hasError = true;
+	    }
+		else{
+		    $pass = $_POST["pass"];
+	    }
+		if(empty($_POST["cpass"])){
+			$err_cpass="Confirm Password Required";
+			$hasError = true;
+		}
+		else if($_POST["cpass"] != $_POST["pass"]){
+			$err_cpass="Password doesen't match!";
+			$hasError = true;
+		}
+		else{
+		    $cpass = $_POST["cpass"];
+	    }
+		
+		if(!$hasError){
+			$rs = updateRegistrar($name,$uname,$nid,$phone,$addrs,$pass);
+			if($rs === true){
+				header("Location: ManageRegistrar.php");
+			}
+			$err_db = $rs;
+		}
+	}
 	
 	function insertCanditate($name,$dob,$uname,$fname,$mname,$mstat,$nid,$phone,$bg,$addrs,$gender,$pass){
-		$query = "insert into users (name,dob,uname,fname,mname,mstatus,nid,phone,pass,bg,address,gender,pass,role) 
-		values ('$name','$dob','$uname','$fname','$mname','$mstat',$nid,$phone,$bg,'$addrs','$gender','$pass','canditate')";
+		$query = "insert into users (name,dob,uname,fname,mname,mstatus,nid,phone,bg,address,gender,pass,role) 
+		values ('$name','$dob','$uname','$fname','$mname','$mstat',$nid,$phone,'$bg','$addrs','$gender','$pass','user')";
+		return execute($query);
+	}
+	
+	function insertRegistrar($name,$uname,$nid,$phone,$addrs,$pass){
+		$query = "insert into users (name,uname,nid,phone,pass,address,role) 
+		values ('$name','$uname',$nid,$phone,'$addrs','$pass','registrar')";
 		return execute($query);
 	}
 	
 	function getCanditates(){
-		$query="select * from users where role='canditate'";
+		$query="select * from users where role='user'";
 		$rs = get($query);
 		return $rs;
 	}
 	
-	function getCanditate($id){
+	function getRegistrars(){
+		$query="select * from users where role='registrar'";
+		$rs = get($query);
+		return $rs;
+	}
+	
+	function getUser($id){
 		$query="select * from users where id=$id";
 		$rs = get($query);
 		return $rs[0];
 	}
 	
-	function deleteCanditate($id){
+	function deleteUser($id){
 		$query="delete from users where id=$id";
 		$rs = execute($query);
 		return $rs;
 	}
 	
-	function getRole($uname,$pass){
-		$query="select role from users where uname='$uname' and pass='$pass'";
+	function getRole($id){
+		$query="select role from users where id='$id'";
 		$rs = get($query);
 		return $rs;
 	}
@@ -211,6 +526,12 @@
 	function updateCanditate($name,$dob,$uname,$fname,$mname,$mstat,$nid,$phone,$bg,$addrs,$gender,$pass){
 		$query = "update users set name='$name', dob='$dob',uname='$uname',fname='$fname',mname='$mname',
 		mstatus='$mstat',nid=$nid,phone=$phone,bg='$bg',address='$addrs',gender='$gender',pass'$pass'";
+		$rs = execute($query);
+		return $rs;
+	}
+		
+	function updateRegistrar($name,$uname,$nid,$phone,$addrs,$pass){
+		$query = "update users set name='$name',uname='$uname',nid=$nid,phone=$phone,address='$addrs',pass'$pass'";
 		$rs = execute($query);
 		return $rs;
 	}

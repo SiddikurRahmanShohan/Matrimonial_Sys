@@ -39,13 +39,13 @@
 								echo "<td>".$c["dob"]."</td>";
 								echo "<td>".$c["bg"]."</td>";
 								echo "<td>".$c["nid"]."</td>";
-								echo "<td>".$s["fname"]."</td>";
-								echo "<td>".$s["mname"]."</td>";
-								echo "<td>".$s["phone"]."</td>";
-								echo "<td>".$s["address"]."</td>";
-								echo "<td>".$s["mstatus"]."</td>";
-								echo '<td><a href = "EditCanditate.php?id='.$s["id"].'">Edit</td>';
-								echo '<td><a href = "DeleteCanditate.php?id='.$s["id"].'">Delete</td>';
+								echo "<td>".$c["fname"]."</td>";
+								echo "<td>".$c["mname"]."</td>";
+								echo "<td>".$c["phone"]."</td>";
+								echo "<td>".$c["address"]."</td>";
+								echo "<td>".$c["mstatus"]."</td>";
+								echo '<td><a href = "EditCanditate.php?id='.$c["id"].'">Edit</td>';
+								echo '<td><a href = "DeleteCanditate.php?id='.$c["id"].'">Delete</td>';
 							echo "</tr>";
 							$i++;
 						}

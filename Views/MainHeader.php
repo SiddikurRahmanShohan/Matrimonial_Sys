@@ -2,7 +2,7 @@
     <head></head>
 	<boady>
 	    <div align = "center">
-		    <h3>Matrimonial Sysytem</h3>
+		    <h3>Matrimonial System</h3>
 		</div>
 	</boady>
 
