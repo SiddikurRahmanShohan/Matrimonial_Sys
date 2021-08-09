@@ -480,6 +480,41 @@
 			$err_db = $rs;
 		}
 	}
+	else if(isset($_POST["login"])){
+		
+		if(empty($_POST["uname"])){
+		    $err_uname = "Username Requird";
+			$hasError = true;
+	    }
+		else{
+		    $uname = $_POST["uname"];
+	    }
+		if(empty($_POST["pass"])){
+		    $err_pass = "Password Requird";
+			$hasError = true;
+	    }
+		else{
+		    $pass = $_POST["pass"];
+	    }
+		if(!$hasError){
+			if($usr = userLogin($uname,$pass)){
+				session_start();
+			    $_SESSION["loggeduser"] = $_POST["uname"];
+				echo $_SESSION["loggeduser"];
+				
+				if($usr["role"] == "admin"){
+					header("Location: AdminHomePage.php");
+				}
+				else if($usr["role"] == "user"){
+					
+				}
+				else if($usr["role"] == "registrar"){
+					
+				}
+			}
+			$err_db = "User Invalid";
+		}
+	}
 	
 	function insertCanditate($name,$dob,$uname,$fname,$mname,$mstat,$nid,$phone,$bg,$addrs,$gender,$pass){
 		$query = "insert into users (name,dob,uname,fname,mname,mstatus,nid,phone,bg,address,gender,pass,role) 
@@ -507,6 +542,11 @@
 	
 	function getUser($id){
 		$query="select * from users where id=$id";
+		$rs = get($query);
+		return $rs[0];
+	}
+	function userLogin($uname,$pass){
+		$query="select * from users where uname='$uname' and pass='$pass'";
 		$rs = get($query);
 		return $rs[0];
 	}
