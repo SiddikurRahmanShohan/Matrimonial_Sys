@@ -499,8 +499,7 @@
 		if(!$hasError){
 			if($usr = userLogin($uname,$pass)){
 				session_start();
-			    $_SESSION["loggeduser"] = $_POST["uname"];
-				echo $_SESSION["loggeduser"];
+			    $_SESSION["loggeduser"] = $usr["uname"];
 				
 				if($usr["role"] == "admin"){
 					header("Location: AdminHomePage.php");
@@ -548,7 +547,12 @@
 	function userLogin($uname,$pass){
 		$query="select * from users where uname='$uname' and pass='$pass'";
 		$rs = get($query);
-		return $rs[0];
+		if($rs> 0){
+			return $rs[0];
+		}
+		else{
+			return false;
+		}
 	}
 	
 	function deleteUser($id){

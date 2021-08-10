@@ -1,5 +1,5 @@
 <?php
-
+ session_start();
 if(!isset($_SESSION["loggeduser"])){
 	header("Location: Login.php");
 }
@@ -12,7 +12,7 @@ if(!isset($_SESSION["loggeduser"])){
     <head></head>
 	<boady>
 	    <div align="center">
-		<h2>Welcome, <?php echo $_SESSION["loggedUser"]; ?></p>
+		<h2>Welcome, <?php echo $_SESSION["loggeduser"]; ?></p>
 	</boady>
     <?php include 'Footer.php'; ?>
 </html>
