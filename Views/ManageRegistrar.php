@@ -1,3 +1,10 @@
+<?php
+ session_start();
+if(!isset($_SESSION["loggeduser"])){
+	header("Location: Login.php");
+}
+
+?>
 <?php include 'MainHeader.php'; ?>
 <?php include 'AdminHeader.php'; ?>
 <?php include '../Controllers/UsersControll.php'; ?>
@@ -34,8 +41,8 @@
 								echo "<td>".$r["phone"]."</td>";
 								echo "<td>".$r["address"]."</td>";
 								echo "<td>".$r["lic"]."</td>";
-								echo '<td><a href = "EditRegistrar.php?id='.$r["id"].'">Edit</td>';
-								echo '<td><a href = "DeleteRegistrar.php?id='.$r["id"].'">Delete</td>';
+								echo '<td><a href = "MessageRegistrar.php?id='.$r["id"].'">Message</td>';
+								echo '<td><a href = "EditUser.php?id='.$r["id"].'">Edit/Delete</td>';
 							echo "</tr>";
 							$i++;
 						}

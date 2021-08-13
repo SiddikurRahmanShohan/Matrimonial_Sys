@@ -4,6 +4,7 @@
 	    <div align="center">
 	    <div>
 		    <h3>Admin</h3>
+			<a href = "AdminHomePage.php" >Home</a>
 		</div>
 		<div>
 			<a href = "ManageCanditates.php" >Manage Canditates</a>

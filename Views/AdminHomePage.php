@@ -11,8 +11,12 @@ if(!isset($_SESSION["loggeduser"])){
 <html>
     <head></head>
 	<boady>
+	<div align="right">
+	    <a href="Dashboard.php">Dashboard</a>
+	</div>
 	    <div align="center">
 		<h2>Welcome, <?php echo $_SESSION["loggeduser"]; ?></p>
+		</div>
 	</boady>
     <?php include 'Footer.php'; ?>
 </html>

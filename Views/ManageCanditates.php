@@ -1,3 +1,10 @@
+<?php
+ session_start();
+if(!isset($_SESSION["loggeduser"])){
+	header("Location: Login.php");
+}
+
+?>
 <?php include 'MainHeader.php'; ?>
 <?php include 'AdminHeader.php'; ?>
 <?php include '../Controllers/UsersControll.php'; ?>
@@ -44,8 +51,7 @@
 								echo "<td>".$c["phone"]."</td>";
 								echo "<td>".$c["address"]."</td>";
 								echo "<td>".$c["mstatus"]."</td>";
-								echo '<td><a href = "EditCanditate.php?id='.$c["id"].'">Edit</td>';
-								echo '<td><a href = "DeleteCanditate.php?id='.$c["id"].'">Delete</td>';
+								echo '<td><a href = "EditUser.php?id='.$c["id"].'">Edit/Delete</td>';
 							echo "</tr>";
 							$i++;
 						}
