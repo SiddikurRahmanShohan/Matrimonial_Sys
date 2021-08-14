@@ -7,7 +7,7 @@ if(!isset($_SESSION["loggeduserid"])){
 ?>
 <?php include 'MainHeader.php'; ?>
 <?php include 'AdminHeader.php'; ?>
-<?php include '../Controllers/UsersControll.php'; ?>
+<?php require '../Controllers/UsersControll.php'; ?>
 <?php $rcvr = getUser($_GET["id"]); ?>
 <?php $sender = getUser($_SESSION["loggeduserid"]);?>
 <?php $msgs = getUserMessage($_GET["id"],$_SESSION["loggeduserid"]); ?>

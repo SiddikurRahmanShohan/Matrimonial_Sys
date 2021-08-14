@@ -7,7 +7,7 @@ if(!isset($_SESSION["loggeduserid"])){
 ?>
 <?php include 'MainHeader.php'; ?>
 <?php include 'AdminHeader.php'; ?>
-<?php include '../Controllers/UsersControll.php'; ?>
+<?php require '../Controllers/UsersControll.php'; ?>
 <?php $usr7 = getUser($_SESSION["loggeduserid"]); ?>
 <html>
 	<head></head>

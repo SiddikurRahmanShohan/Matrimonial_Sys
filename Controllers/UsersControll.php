@@ -43,6 +43,7 @@
         }
 		return false;
 	}
+	if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     if(isset($_POST["addCanditate"])){
 		if(empty($_POST["name"])){
@@ -475,6 +476,7 @@
 			}
 			$err_db = "User Invalid";
 		}
+	}
 	}
 	
 	function insertCanditate($name,$dob,$uname,$fname,$mname,$mstat,$nId,$phone,$bg,$addrs,$gender,$pass){
