@@ -12,8 +12,8 @@
     $err_mname="";
 	$gender="";
     $err_gender="";
-	$nid="";
-    $err_nid="";
+	$nId="";
+    $err_nId="";
 	$phone="";
     $err_phone="";
 	$addrs="";
@@ -100,16 +100,30 @@
 		else{
 		    $gender = $_POST["gender"];
 	    }
-		if(empty($_POST["nid"])){
-		    $err_nid = "NID Requird";
+		if(empty($_POST["bg"])){
+		    $err_bg = "Blood Group Requird";
 			$hasError = true;
 	    }
-		else if(!numCharCheck($_POST["nid"])){
-			$err_nid="NID must be a number";
+		else{
+		    $bg = $_POST["bg"];
+	    }
+		if(empty($_POST["mstat"])){
+		    $err_mstat = "Marital stastus Requird";
+			$hasError = true;
+	    }
+		else{
+		    $mstat = $_POST["mstat"];
+	    }
+		if(empty($_POST["natId"])){
+		    $err_nId = "NID Requird";
+			$hasError = true;
+	    }
+		else if(!numCharCheck($_POST["natId"])){
+			$err_nId="NID must be a number";
 			$hasError = true;
 		}
 		else{
-		    $nid = $_POST["nid"];
+		    $nId = $_POST["natId"];
 	    }
 		if(empty($_POST["phone"])){
 		    $err_phone = "Phone Number Requird";
@@ -142,9 +156,16 @@
 	    }
 		
 		if(!$hasError){
-			$rs = insertCanditate($name,$dob,$uname,$fname,$mname,$mstat,$nid,$phone,$bg,$addrs,$gender,$pass);
+			$rs = insertCanditate($name,$dob,$uname,$fname,$mname,$mstat,$nId,$phone,$bg,$addrs,$gender,$pass);
 			if($rs === true){
-				header("Location: ManageCanditates.php");
+				
+				$usr3 = getUser($_POST["pid"]);
+				if($usr3["role"]== 'admin'){
+					header("Location: ManageCanditates.php");
+				}
+				else{
+					header("Location: Login.php");
+				}
 			}
 			$err_db = $rs;
 		}
@@ -196,16 +217,16 @@
 		else{
 		    $phone = $_POST["phone"];
 	    }
-		if(empty($_POST["nid"])){
-		    $err_nid = "NID Requird";
+		if(empty($_POST["natId"])){
+		    $err_nId = "NID Requird";
 			$hasError = true;
 	    }
-		else if(!numCharCheck($_POST["nid"])){
-			$err_nid="NID must be a number";
+		else if(!numCharCheck($_POST["natId"])){
+			$err_nId="NID must be a number";
 			$hasError = true;
 		}
 		else{
-		    $nid = $_POST["nid"];
+		    $nId = $_POST["natId"];
 	    }
 		if(empty($_POST["addrs"])){
 		    $err_addrs = "Addresss Requird";
@@ -216,10 +237,10 @@
 	    }
 		
 		if(!$hasError){
-			$rs = updateUser($nid,$name,$uname,$phone,$addrs,$_POST["pid"]);
+			$rs = updateUser($nId,$name,$uname,$phone,$addrs,$_POST["pid"]);
 			if($rs === true){
-				$usr = getUser($_POST["pid"]);
-				if($usr["role"]== 'registrar'){
+				$usr4 = getUser($_POST["pid"]);
+				if($usr4["role"]== 'registrar'){
 					header("Location: ManageRegistrar.php");
 				}
 				else{
@@ -262,16 +283,16 @@
 		    $uname = $_POST["uname"];
 	    }
 			
-		if(empty($_POST["nid"])){
-		    $err_nid = "NID Requird";
+		if(empty($_POST["natid"])){
+		    $err_nId = "NID Requird";
 			$hasError = true;
 	    }
-		else if(!numCharCheck($_POST["nid"])){
-			$err_nid="NID must be a number";
+		else if(!numCharCheck($_POST["natid"])){
+			$err_nId="NID must be a number";
 			$hasError = true;
 		}
 		else{
-		    $nid = $_POST["nid"];
+		    $nId = $_POST["natid"];
 	    }
 		if(empty($_POST["phone"])){
 		    $err_phone = "Phone Number Requird";
@@ -304,7 +325,7 @@
 	    }
 		
 		if(!$hasError){
-			$rs = insertRegistrar($name,$uname,$nid,$phone,$addrs,$pass);
+			$rs = insertRegistrar($name,$uname,$nId,$phone,$addrs,$pass);
 			if($rs === true){
 				header("Location: ManageRegistrar.php");
 			}
@@ -330,18 +351,18 @@
 		    $pass = $_POST["pass"];
 	    }
 		if(!$hasError){
-			if($usr = userLogin($uname,$pass)){
+			if($usr1 = userLogin($uname,$pass)){
 				session_start();
-			    $_SESSION["loggeduser"] = $usr["uname"];
-				$_SESSION["loggeduserid"] = $usr["id"];
+			    $_SESSION["loggeduser"] = $usr1["uname"];
+				$_SESSION["loggeduserid"] = $usr1["id"];
 				
-				if($usr["role"] == "admin"){
+				if($usr1["role"] == "admin"){
 					header("Location: AdminHomePage.php");
 				}
-				else if($usr["role"] == "user"){
+				else if($usr1["role"] == "user"){
 					
 				}
-				else if($usr["role"] == "registrar"){
+				else if($usr1["role"] == "registrar"){
 					
 				}
 			}
@@ -388,12 +409,12 @@
 	}
 	
 	else if(isset($_POST["chagePassword"])){
-		$usr= getUser($_POST["pid"]);
+		$usr2= getUser($_POST["pid"]);
 		if(empty($_POST["oPass"])){
 		    $err_opass = "Old Password Requird";
 			$hasError = true;
 	    }
-		else if($usr["pass"]!= $_POST["oPass"]){
+		else if($usr2["pass"]!= $_POST["oPass"]){
 		    $err_opass = "Old Password dosen't match!";
 			$hasError = true;
 	    }
@@ -431,13 +452,13 @@
 			}
 		}
 	
-	function insertCanditate($name,$dob,$uname,$fname,$mname,$mstat,$nid,$phone,$bg,$addrs,$gender,$pass){
+	function insertCanditate($name,$dob,$uname,$fname,$mname,$mstat,$nId,$phone,$bg,$addrs,$gender,$pass){
 		$query = "insert into users (name,dob,uname,fname,mname,mstatus,nid,phone,bg,address,gender,pass,role) 
-		values ('$name','$dob','$uname','$fname','$mname','$mstat',$nid,$phone,'$bg','$addrs','$gender','$pass','user')";
+		values ('$name','$dob','$uname','$fname','$mname','$mstat',$nId,$phone,'$bg','$addrs','$gender','$pass','user')";
 		return execute($query);
 	}
 	
-	function insertRegistrar($name,$uname,$nid,$phone,$addrs,$pass){
+	function insertRegistrar($name,$uname,$nId,$phone,$addrs,$pass){
 		$query = "insert into users (name,uname,nid,phone,pass,address,role) 
 		values ('$name','$uname',$nid,$phone,'$addrs','$pass','registrar')";
 		return execute($query);
@@ -483,15 +504,9 @@
 		return $rs;
 	}
 	
-	function updateCanditate($name,$dob,$uname,$fname,$mname,$mstat,$nid,$phone,$bg,$addrs,$gender,$pass){
-		$query = "update users set name='$name', dob='$dob',uname='$uname',fname='$fname',mname='$mname',
-		mstatus='$mstat',nid=$nid,phone=$phone,bg='$bg',address='$addrs',gender='$gender',pass'$pass'";
-		$rs = execute($query);
-		return $rs;
-	}
 		
-	function updateUser($nid,$name,$uname,$phone,$addrs,$id){
-		$query = "update users set name='$name',uname='$uname',nid=$nid,phone=$phone,address='$addrs' where id=$id";
+	function updateUser($nId,$name,$uname,$phone,$addrs,$id){
+		$query = "update users set name='$name',uname='$uname',nid=$nId,phone=$phone,address='$addrs' where id=$id";
 		$rs = execute($query);
 		return $rs;
 	}

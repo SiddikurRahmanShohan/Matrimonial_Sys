@@ -8,7 +8,7 @@ if(!isset($_SESSION["loggeduserid"])){
 <?php include 'MainHeader.php'; ?>
 <?php include 'AdminHeader.php'; ?>
 <?php include '../Controllers/UsersControll.php'; ?>
-<?php $usr = getUser($_SESSION["loggeduserid"]); ?>
+<?php $usr5 = getUser($_SESSION["loggeduserid"]); ?>
 <html>
 	<head></head>
 	<body>
@@ -20,19 +20,19 @@ if(!isset($_SESSION["loggeduserid"])){
 					<tr>
 					    <input type = "hidden" name = "pid" value="<?php echo $_SESSION["loggeduserid"];?>"/>
 						<td align="right">Name: </td>
-						<td><input type="text" name="name" value="<?php echo $usr["name"];?>"></td>
+						<td><input type="text" name="name" value="<?php echo $usr5["name"];?>"></td>
 						<td><span><?php echo $err_name;?></span></td>
 						
 					</tr>
 					<tr>
 						<td align="right">Username: </td>
-						<td><input type="text" name="uname" value="<?php echo $usr["uname"];?>"></td>
+						<td><input type="text" name="uname" value="<?php echo $usr5["uname"];?>"></td>
 						<td><span><?php echo $err_uname;?></span></td>
 					</tr>
 					
 					<tr>
 						<td align="right">Phone: </td>
-						<td><input type="text" name="phone" value="<?php echo $usr["phone"];?>"></td>
+						<td><input type="text" name="phone" value="<?php echo $usr5["phone"];?>"></td>
 						<td><span><?php echo $err_phone;?></span></td>
 					</tr>
 					<tr>
