@@ -497,6 +497,12 @@
 		return $rs;
 	}
 	
+	function getFeedbacks(){
+		$query="select * from feedbacks";
+		$rs = get($query);
+		return $rs;
+	}
+	
 	function getRegistrars(){
 		$query="select * from users where role='registrar'";
 		$rs = get($query);
@@ -505,6 +511,16 @@
 	
 	function getUser($id){
 		$query="select * from users where id=$id";
+		$rs = get($query);
+		return $rs[0];
+	}
+	function getUserName($id){
+		$query="select uname from users where id=$id";
+		$rs = get($query);
+		return $rs[0];
+	}
+	function getUserPhone($id){
+		$query="select phone from users where id=$id";
 		$rs = get($query);
 		return $rs[0];
 	}
