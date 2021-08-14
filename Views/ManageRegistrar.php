@@ -41,7 +41,7 @@ if(!isset($_SESSION["loggeduser"])){
 								echo "<td>".$r["phone"]."</td>";
 								echo "<td>".$r["address"]."</td>";
 								echo "<td>".$r["lic"]."</td>";
-								echo '<td><a href = "MessageRegistrar.php?id='.$r["id"].'">Message</td>';
+								echo '<td><a href = "Message.php?id='.$r["id"].'">Message</td>';
 								echo '<td><a href = "EditUser.php?id='.$r["id"].'">Edit/Delete</td>';
 							echo "</tr>";
 							$i++;

@@ -29,6 +29,8 @@
 	$err_cpass="";
 	$opass="";
 	$err_opass="";
+	$mesg="";
+	$err_mesg="";
 	$npass="";
 	$err_npass="";
 	$hasError = false;
@@ -451,6 +453,29 @@
 			  }
 			}
 		}
+		
+		else if(isset($_POST["sendMessage"])){
+		
+		if(empty($_POST["mesg"])){
+		    $err_mesg = "Message Requird";
+			$hasError = true;
+	    }
+		else{
+		    $mesg = $_POST["mesg"];
+	    }
+		if(!$hasError){
+			if(sendMessage($mesg,$_POST["rid"],$_POST["sid"],date("d/m/y"),date("h:i:sa"))){
+				$usr10 = getUser($_POST["sid"]);
+				if($usr10["role"]== 'admin'){
+					header("Location: ManageRegistrar.php");
+				}
+				else{
+					header("Location: ManageCanditates.php");
+				}
+			}
+			$err_db = "User Invalid";
+		}
+	}
 	
 	function insertCanditate($name,$dob,$uname,$fname,$mname,$mstat,$nId,$phone,$bg,$addrs,$gender,$pass){
 		$query = "insert into users (name,dob,uname,fname,mname,mstatus,nid,phone,bg,address,gender,pass,role) 
@@ -500,6 +525,18 @@
 	
 	function getRole($id){
 		$query="select role from users where id='$id'";
+		$rs = get($query);
+		return $rs;
+	}
+	
+	function sendMessage($msg,$rid,$uid,$date,$time){
+		$query = "insert into messages (message,date,time,reciver_id,uid) 
+		values ('$msg','$date','$time',$rid,$uid)";
+		return execute($query);
+	}
+	
+	function getUserMessage($rid,$uid){
+		$query="select * from messages where uid=$uid and reciver_id=$rid";
 		$rs = get($query);
 		return $rs;
 	}
