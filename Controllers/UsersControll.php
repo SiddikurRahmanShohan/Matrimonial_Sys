@@ -497,6 +497,32 @@
 		return $rs;
 	}
 	
+	function getTotal(){
+		$query="select count(id) from users";
+		$rs = get($query);
+		return $rs[0];
+	}
+	function getTotMale(){
+		$query="select count(id) from users where gender='male'";
+		$rs = get($query);
+		return $rs[0];
+	}
+	function getTotFemale(){
+		$query="select count(id) from users where gender='female'";
+		$rs = get($query);
+		return $rs[0];
+	}
+	function getTotReg(){
+		$query="select count(id) from users where role='registrar'";
+		$rs = get($query);
+		return $rs[0];
+	}
+	function getTotCan(){
+		$query="select count(id) from users where role='user'";
+		$rs = get($query);
+		return $rs[0];
+	}
+	
 	function getFeedbacks(){
 		$query="select * from feedbacks";
 		$rs = get($query);
