@@ -3,7 +3,16 @@
 ?>
 
 <html>
-	<head> <h2>Welcome <?php echo $_SESSION["username"];?>to Download Certificate</h2></head>
+	<head>
+    <style>
+	    body {background-color:rgb(242, 242, 242); margin:50px; padding-left:500px;}
+        h2 {color:#812F33; }
+		a{color:blue;}
+		id{color:blue;}
+		fieldset {background-color:#F3FEB0;  height:auto; width:400px; }
+		</style> 
+    <h2>Welcome <?php echo $_SESSION["username"];?>to Download Certificate</h2>
+    </head>
 	<body>
    
 		<fieldset>

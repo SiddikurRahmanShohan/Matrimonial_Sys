@@ -1,9 +1,23 @@
 <?php
     session_start();	
+    require "../Models/DBConfig.php";
+	
+	$userid = $_SESSION['userid'];
+	$query = "select * from users where users.id='$userid' limit 1 ";
+	$previousData = get($query);
+
 ?>
 
 <html>
-	<head> <h2>Welcome <?php echo $_SESSION["username"];?> to Apply Certificate</h2></head>
+	<head>
+    <style>
+	    body {background-color:rgb(242, 242, 242); margin:50px; padding-left:500px;}
+        h2 {color:#812F33; }
+		a{color:blue;}
+		id{color:blue;}
+		fieldset {background-color:#F3FEB0;  height:auto; width:400px; }
+		</style>    
+    <h2>Welcome <?php echo $_SESSION["username"];?> to Apply Certificate</h2></head>
 	<body>
    
 		<fieldset>
@@ -17,8 +31,8 @@
                                   <b><u>MARRIAGE CERTIFICATE</u></b>  
 
 
-        This is to certify that <u>groom_name</u> Son of <u>father_name</u> & <u>mother_name</u> of <u>address</u>,
-        Date of Birth  <u>DOB</u>, NID No: <u>NID</u>, Religion: ....., Married with <u>bride_name</u> Daughter 
+        This is to certify that <b><?=$previousData[0]['name']?></b> Son of <b><?=$previousData[0]['fname']?></b> & <b><?=$previousData[0]['mname']?></b> of <b><?=$previousData[0]['address']?></b>,
+        Date of Birth <b><?=$previousData[0]['dob']?></b>, NID No:<b><?=$previousData[0]['nid']?></b>, Religion:<b><?=$previousData[0]['religion']?></b> Married with <u>bride_name</u> Daughter 
         of <u>father_name</u> & <u>mother_name</u> of <u>address</u>, Date of Birth:<u>DOB</u>, NID No:<u>NID</u> Religion:
         <u>...</u>,. The marriage was aolemnized on  <u>Date</u>   and registered in my office on  <u>date</u> 
         being registration serial No:  <u>....</u> in the year of  <u>Year</u> in <u>address</u>. The marriage 
@@ -35,7 +49,7 @@
 
 
 
-        Date of issue:<u>Date</u>                                                  <u>----------</u>   
+        Date of issue:.....                                                <u>----------</u>   
                                                                              Registrar
 
 </pre></p>		

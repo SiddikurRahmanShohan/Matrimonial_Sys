@@ -7,10 +7,12 @@ if(!isset($_SESSION["loggeduserid"])){
 ?>
 <?php include 'MainHeader.php'; ?>
 <?php include 'AdminHeader.php'; ?>
-<?php require '../Controllers/UsersControll.php'; ?>
-<?php $usr7 = getUser($_SESSION["loggeduserid"]); ?>
+<?php include '../Controllers/UsersControll.php'; ?>
+<?php $usr = getUser($_SESSION["loggeduserid"]); ?>
 <html>
-	<head></head>
+	<head>
+		
+	</head>
 	<body>
 	<div align="center">
 	    <h3>Dashboard</h3>
@@ -19,23 +21,23 @@ if(!isset($_SESSION["loggeduserid"])){
 				<table >
 					<tr>
 						<td align="right">Name: </td>
-						<td><P><?php echo $usr7["name"];?></p></td>
+						<td><P><?php echo $usr["name"];?></p></td>
 						
 					</tr>
 					<tr>
 						<td align="right">Username: </td>
-						<td><P><?php echo $usr7["uname"];?></p></td>
+						<td><P><?php echo $usr["uname"];?></p></td>
 					</tr>
 					
 			        <tr>
 						<td align="right">NID: </td>
-						<td><P><?php echo $usr7["nid"];?></p></td>
+						<td><P><?php echo $usr["nid"];?></p></td>
 						
 					</tr>
 					
 					<tr>
 						<td align="right">Phone: </td>
-						<td><P><?php echo $usr7["phone"];?></p></td>
+						<td><P><?php echo $usr["phone"];?></p></td>
 					</tr>
 					
 					<tr>

@@ -2,6 +2,32 @@
 	session_start();
 	require "../Models/DBConfig.php";
 	
+
+	if(isset($_SESSION["success"]))
+	{
+		echo '<h3 align="center" style="color:green">'.'Successfully Updated'.'</h3>';
+		unset($_SESSION["success"]);
+	}
+	
+
+	//Advance validation
+	if(isset($_SESSION["erorr"]))
+	{
+		echo '<h3 align="center" style="color:red">'.'Failed to update'.'</h3>';
+		unset($_SESSION["erorr"]);
+	}
+
+	//---------------
+
+
+
+	$userid = $_SESSION['userid'];
+
+	$query = "select * from users where users.id='$userid' limit 1 ";
+	$previousData = get($query);
+
+	
+
 	$name="";
 	$err_name="";
 	$uname="";
@@ -105,48 +131,68 @@
 			// echo $_POST["nid"]."<br/>";
 			// echo $_POST["address"]."<br/>";
 
-			$query = "UPDATE `users` SET `name` = 'soumiks', `uname` = 'kfdiua', `phone` = '214748364', `email` = 'wjenaf1@gmail.com', `address` = 'askfbiuaw' WHERE `users`.`id` = 8;"
+			$query = "UPDATE `users` SET `name` = '$name', `uname` = '$uname', `phone` = '$phone', `email` = '$email', `address` = '$address' WHERE `users`.`id` = '$userid';";
+			
+			execute($query);
+			$_SESSION["success"] = true;
+			header("Refresh:0");
+
+		}
+		else
+		{
+			//------------
+			$_SESSION["erorr"] =true;
+			header("Refresh:0");
+			//------------
 		}
 		
 		
 	}
 ?>
 <html>
-	<head></head>
+	<head>
+	<style>
+	    body {background-color:rgb(242, 242, 242); margin:50px; padding-left:500px;}
+        h2 {color:#812F33; }
+		a{color:blue;}
+		id{color:blue;}
+		fieldset {background-color:#F3FEB0;  height:250px; width:400px; }
+		</style>
+	</head>
 	<body>
-	    <h2>Welcome  <?php echo $_SESSION["username"];?> To Edit Details Page</h2>
 		<fieldset>
 			<form action="" method="post">
 				<table >
+					<tr> <h2>Welcome  <?php echo $_SESSION["username"];?> To Edit Details Page</h2></tr>
 					<tr>
-						<td align="right">Name: </td>
-						<td><input type="text" name="name" placeholder="name" value="<?php echo $name;?>"></td>
+						<td align="right" style="color:rgb(20,155,155)"><u>Name: </u></td>
+						<td ><input type="text" name="name" placeholder="name" value="<?=$previousData[0]["name"]?>"></td>
 						<td><span><?php echo $err_name;?></span></td>
 						
 					</tr>
 					<tr>
-						<td align="right">Username: </td>
-						<td><input type="text" name="username" placeholder="username" value="<?php echo $uname;?>" ></td>
+						<td align="right" style="color:rgb(20,155,155)"><u>Username: </u></td>
+						<td><input type="text" name="username" placeholder="username" value="<?=$previousData[0]["uname"]?>" ></td>
 						<td><span><?php echo $err_uname;?></span></td>
 					</tr>
 					
 					
 					<tr>
-						<td align="right">Phone: </td>
-						<td><input type="text" name="phone" placeholder="phone" value="<?php echo $phone;?>"></td>
+						<td align="right" style="color:rgb(20,155,155)"><u>Phone: </u></td>
+						<td><input type="text" name="phone" placeholder="phone" value="<?=$previousData[0]["phone"]?>"></td>
 						<td><span><?php echo $err_phone;?></span></td>
 					</tr>
 					
 					
 					<tr>
-						<td align="right">Email: </td>
-						<td><input type="text" name="email" placeholder="username@gmail.com" value="<?php echo $email;?>"></td>
+						<td align="right" style="color:rgb(20,155,155)"><u>Email: </u></td>
+						<td><input type="text" name="email" placeholder="username@gmail.com" value="<?=$previousData[0]["email"]?>"></td>
 						<td><span><?php echo $err_email;?></span></td>
 					</tr>
 					
 					<tr>
-						<td align="right">Address: </td>
-						<td><input type="text" name="address" placeholder="address" value="<?php echo $address;?>"></td>
+						<td align="right" style="color:rgb(20,155,155)"><u>Address: </u></td>
+						<td><input type="text" name="address" placeholder="address" value="<?=$previousData[0]["address"]?>"></td>
 						<td><span><?php echo $err_address;?></span></td>
 					</tr>
 					

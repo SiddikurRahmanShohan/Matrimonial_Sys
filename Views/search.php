@@ -3,6 +3,15 @@
 
 ?>
 <html>
+	<head>
+	<style>
+	    body {background-color:rgb(242, 242, 242); margin:50px; padding-left:500px;}
+        h2 {color:#812F33; }
+		a{color:blue;}
+		id{color:blue;}
+		fieldset {background-color:#F3FEB0;  height:250px; width:400px; }
+		</style>
+		</head>
 	<body>
 	<fieldset>
 	<form action="" method="post">

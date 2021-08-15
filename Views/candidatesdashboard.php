@@ -1,5 +1,6 @@
 <?php
     session_start();
+	require "../Models/DBConfig.php";
 
 	$name="";
 	$uname="";
@@ -10,6 +11,9 @@
 	$phone="";
 	$email="";
 	
+	$userid = $_SESSION['userid'];
+	$query = "select * from users where users.id='$userid' limit 1 ";
+	$previousData = get($query);
 	
 	$empty_err="";
 	
@@ -49,51 +53,62 @@
 	}
 ?>
 <html>
-	<head></head>
+	<head>
+	<style>
+	    body {background-color:rgb(242, 242, 242); margin:50px; padding-left:500px;}
+        h2 {color:#812F33; }
+		a{color:blue;}
+		id{color:blue;}
+		fieldset {background-color:#F3FEB0;  height:250px; width:400px; }
+		</style>
+	</head>
 	<body>
+	        
 		<fieldset>
 			<form action="" method="post">
+		
 				<table >
+
 					<tr>
 					<td align ="center" colspan ="2"> <h2>Welcome <?php echo $_SESSION["username"];?> To Dashboard</h2></td>
 					</tr>
 					<tr>
-						<td align="right">Name: </td>
-						<td><input type="text" name="name" value="<?php echo $name;?>"></td>
+						<td align="right" style="color:#705E78"><u>Name: </u></td>
+						<td><?=$previousData[0]['name']?></td>
 						
 					</tr>
 					<tr>
-						<td align="right">Username: </td>
+						<td align="right" style="color:#705E78"><u>Username: </u></td>
 						<td><?php echo $_SESSION["username"];?></td>
 					</tr>
 					<tr>
-						<td align="right">Address: </td>
-						<td><input type="text" name="name" value="<?php echo $address;?>"></td>
+						<td align="right" style="color:#705E78"><u>Address: </u></td>
+						<td><?=$previousData[0]['address']?></td>
 						
 					</tr>
 					<tr>
-						<td align="right">Gender: </td>
-						<td><input type="text" name="gender" value="<?php echo $gender;?>"></td>
+						<td align="right" style="color:#705E78"><u>Gender: </u></td>
+						<td><?=$previousData[0]['gender']?></td>
 					</tr>
 					<tr>
-						<td align="right">Blood Group: </td>
-						<td><input type="text" name="bg" value="<?php echo $bg;?>"></td>
+						<td align="right" style="color:#705E78"><u>Blood Group: </u></td>
+						<td><?=$previousData[0]['bg']?> </td>
 					</tr>
 					<tr>
-						<td align="right">Email: </td>
-						<td><input type="text" name="email" value="<?php echo $email;?>"></td>
+						<td align="right" style="color:#705E78"><u>Email: </u></td>
+						<td><?=$previousData[0]['email']?></td>
 					</tr>
 					
 			        <tr>
-						<td align="right">NID: </td>
-						<td><input type="text" name="nid" value="<?php echo $nId;?>"></td>
+						<td align="right" style="color:#705E78"><u>NID: </u></td>
+						<td><?=$previousData[0]['nid']?></td>
 						
 					</tr>
                     
 					
 					<tr>
-						<td align="right">Phone: </td>
-						<td><input type="text" name="phone" value="<?php echo $phone;?>"></td>
+					<td align="right" style="color:#705E78"><u>Phone: </u></td>
+						<td><?=$previousData[0]['phone']?></td>
 					</tr>
 				
 					<tr>

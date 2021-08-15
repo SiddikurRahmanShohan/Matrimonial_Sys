@@ -2,6 +2,16 @@
 	session_start();
 ?>
 <html>
+	<head>
+	<style>
+	    body {background-color:rgb(242, 242, 242); margin:50px; padding-left:500px;}
+        h2 {color:#812F33; }
+		a{color:blue;}
+		id{color:blue;}
+		fieldset {background-color:#F3FEB0;  height:250px; width:400px; }
+		</style>
+	</head>
+
 	<body>
 	<fieldset>
 	<form action="" method="post">
@@ -25,6 +35,6 @@
 	</form>
 	</table>
 	</fieldset><br>
-		<a href="login.php">Logout</a>
+		<a href="login.php" style="border-style:double">Logout</a>
 	</body>
 </html>
