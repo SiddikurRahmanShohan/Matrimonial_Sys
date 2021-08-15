@@ -1,12 +1,12 @@
 <?php
 	$name="";
 	$uname="";
-	$nid= "";
+	$nId= "";
 	$lnumber="";
 	$email="";
-	$number= "";
+	$phone= "";
 	$office="";
-	$address="";
+	$addrs="";
 	$empty_err="";
 	
 	
@@ -16,7 +16,7 @@
 
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 		
-		if(empty($_POST["name"])and empty($_POST["uname"]) and empty($_POST["nid"])and empty($_POST["lnumber"])and empty($_POST["number"])  and empty($_POST["email"]) and empty($_POST["office"]) 
+		if(empty($_POST["name"])and empty($_POST["username"]) and empty($_POST["nid"])and empty($_POST["lnumber"])and empty($_POST["phone"])  and empty($_POST["email"]) and empty($_POST["office"]) 
 			and empty($_POST["address"]) and empty($_POST["nid"]) )
 		
 		{
@@ -25,10 +25,10 @@
 		}
 		else{
 			$name=htmlspecialchars($_POST["name"]);
-			$uname=htmlspecialchars($_POST["uname"]);
+			$uname=htmlspecialchars($_POST["username"]);
 			$nid=htmlspecialchars($_POST["nid"]);
 			$lnumber=htmlspecialchars($_POST["lnumber"]);
-			$number=htmlspecialchars($_POST["number"]);
+			$number=htmlspecialchars($_POST["phone"]);
 			$email=htmlspecialchars($_POST["email"]);
 			$office=htmlspecialchars($_POST["office"]);
 			$address=htmlspecialchars($_POST["address"]);
@@ -42,7 +42,7 @@
 		
 		if(!$hasError){
 			echo $_POST["name"]."<br>";
-			echo $_POST["uname"]."<br/>";
+			echo $_POST["usename"]."<br/>";
 			echo $_POST["nid"]."<br/>";
 			echo $_POST["lnumber"]."<br/>";
 			echo $_POST["number"]."<br/>";
@@ -69,18 +69,18 @@
 			<form action="" method="post">
 				<table align="center">
 					<tr>
-						<td>Name: </td>
-						<td><input type="text" name="name" placeholder="Name" value="<?php echo $name;?>"></td>
+						<td align="right">Name: </td>
+						<td><input type="text" name="name" value="<?php echo $name;?>"></td>
 						
 					</tr>
 					<tr>
-						<td>User Name: </td>
-						<td><input type="text" name="uname" placeholder="User Name"  value="<?php echo $uname;?>" ></td>
+						<td align="right">Username: </td>
+						<td><input type="text" name="username" value="<?php echo $uname;?>" ></td>
 					</tr>
 					
 			        <tr>
-						<td>NID: </td>
-						<td><input type="text" name="nid" placeholder="NID"  value="<?php echo $nid;?>"></td>
+						<td align="right">NID: </td>
+						<td><input type="text" name="nid" value="<?php echo $nId;?>"></td>
 						
 					</tr>
 					<tr>
@@ -92,7 +92,7 @@
 					
 					<tr>
 						<td>Contact Number: </td>
-						<td><input type="text" name="number" placeholder="Contact Number" value="<?php echo $number;?>"></td>
+						<td><input type="text" name="number" placeholder="Contact Number" value="<?php echo $phone;?>"></td>
 					</tr>
 					
 					
@@ -107,14 +107,14 @@
 					</tr>
 					<tr>
 						<td>Address: </td>
-						<td><input type="text" name="address" placeholder="Address" value="<?php echo $address;?>"></td>
+						<td><input type="text" name="address" placeholder="Address" value="<?php echo $addrss;?>"></td>
 					</tr>
 					
 					
 					
 					<tr>
-						<td><a href="EditMyProfile.php">Edit Profile</a></td>
-						
+						<td align="center"><a href="EditRegistrar.php">Edit</a></td>
+						<td align="center"><a href="EditPassword.php">Change Password</a></td>
 					</tr>
 					<tr>
 						<td align="center" colspan="2"><span><?php echo $empty_err;?></span></td>

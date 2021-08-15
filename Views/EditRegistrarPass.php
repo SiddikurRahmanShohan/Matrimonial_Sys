@@ -6,7 +6,7 @@ if(!isset($_SESSION["loggeduserid"])){
 
 ?>
 <?php include 'MainHeader.php'; ?>
-<?php include 'AdminHeader.php'; ?>
+<?php include 'RegistrarHeader.php'; ?>
 <?php require '../Controllers/UsersControll.php';
 //include '../Controllers/RegistrarController.php';
  ?>

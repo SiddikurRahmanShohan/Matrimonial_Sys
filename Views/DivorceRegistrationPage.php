@@ -50,7 +50,7 @@ $hasError=false;
 <html>
 	
 	<body>
-	            <h2 align="center">  Marrage Registration  </h2>    
+	            <h2 align="center">  Divorce Registration  </h2>    
 		<fieldset>
 		  
 			<form action="" method="post" enctype="multipart/form-data">

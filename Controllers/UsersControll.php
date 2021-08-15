@@ -366,7 +366,7 @@
 					
 				}
 				else if($usr1["role"] == "registrar"){
-					
+					header("Location: RegistrarHomePage.php");
 				}
 			}
 			$err_db = "User Invalid";
