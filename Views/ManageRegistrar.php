@@ -26,7 +26,7 @@ if(!isset($_SESSION["loggeduser"])){
 	    <div align="center">
 		    <h3>Registrar</h3>
 			<a class="btn-orange" href = "AddRegistrar.php" >Add Registrar</a>
-			<a  class="btn-blue" href="Candidatesregister.php">Lic. Approve</a>
+			<a  class="btn-blue" href="LicRequests.php">Lic. Approve</a>
 			<h5><?php echo $err_db; ?></h5>
 			<form action="" onsubmit="return validate()" method="post">
 			<input type="text"  name="regS" placeholder="Search..." >

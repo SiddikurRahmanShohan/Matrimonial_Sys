@@ -35,6 +35,8 @@
 	$err_npass="";
 	$regS="";
 	$err_regS="";
+	$lic="";
+	$err_lic="";
 	$hasError = false;
 	
 	function numCharCheck($pas){
@@ -288,16 +290,16 @@
 		    $uname = $_POST["uname"];
 	    }
 			
-		if(empty($_POST["natid"])){
+		if(empty($_POST["natId"])){
 		    $err_nId = "NID Requird";
 			$hasError = true;
 	    }
-		else if(!numCharCheck($_POST["natid"])){
+		else if(!numCharCheck($_POST["natId"])){
 			$err_nId="NID must be a number";
 			$hasError = true;
 		}
 		else{
-		    $nId = $_POST["natid"];
+		    $nId = $_POST["natId"];
 	    }
 		if(empty($_POST["phone"])){
 		    $err_phone = "Phone Number Requird";
@@ -485,6 +487,29 @@
 		}
 	}
 	
+	else if(isset($_POST["apvLic"])){
+		
+		    if(empty($_POST["alic"])){
+		    $err_lic = "Licence Requird";
+			$hasError = true;
+	    }
+		else{
+		    $lic = $_POST["alic"];
+	    }
+			
+		if(!$hasError){
+			$rs = updateLic($lic,$_POST["luid"]);
+			if($rs === true){
+				$gs =updateVer($_POST["luid"]);
+				if($gs === true){
+				header("Location: ManageRegistrar.php");      
+			}
+	
+			}
+			$err_db = $rs;
+		}
+	}
+	
 	}
 	
 	function insertCanditate($name,$dob,$uname,$fname,$mname,$mstat,$nId,$phone,$bg,$addrs,$gender,$pass){
@@ -495,7 +520,7 @@
 	
 	function insertRegistrar($name,$uname,$nId,$phone,$addrs,$pass){
 		$query = "insert into users (name,uname,nid,phone,pass,address,role) 
-		values ('$name','$uname',$nid,$phone,'$addrs','$pass','registrar')";
+		values ('$name','$uname',$nId,$phone,'$addrs','$pass','registrar')";
 		return execute($query);
 	}
 	
@@ -568,6 +593,26 @@
 			return false;
 		}
 	}
+	function getRegName($id){
+		$query="select name from users where id=$id";
+		$rs = get($query);
+		return $rs[0];
+	}
+	function getRegPhone($id){
+		$query="select phone from users where id=$id";
+		$rs = get($query);
+		return $rs[0];
+	}
+	function getRegNID($id){
+		$query="select nid from users where id=$id";
+		$rs = get($query);
+		return $rs[0];
+	}
+	function getRegAddrs($id){
+		$query="select address from users where id=$id";
+		$rs = get($query);
+		return $rs[0];
+	}
 	
 	function deleteUser($id){
 		$query="delete from users where id=$id";
@@ -610,6 +655,16 @@
 		$rs = execute($query);
 		return $rs;
 	}
+	function updateLic($lic,$id){
+		$query = "update users set lic=$lic where id=$id";
+		$rs = execute($query);
+		return $rs;
+	}
+	function updateVer($id){
+		$query = "update verification set status='ok' where uid=$id";
+		$rs = execute($query);
+		return $rs;
+	}
 	function search($key){
 		$query = "select id,name from users where name like '%$key%' or uname like '%$key%' and role='user'";
 		$rs = get($query);
@@ -617,6 +672,11 @@
 	}
 	function searchReg($nam){
 		$query = "select * from users where name like '%$nam%' or uname like '%$nam%' and role='registrar'";
+		$rs = get($query);
+		return $rs;
+	}
+	function getRequests(){
+		$query="select * from verification where status='not'";
 		$rs = get($query);
 		return $rs;
 	}
