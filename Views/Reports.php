@@ -19,7 +19,7 @@ if(!isset($_SESSION["loggeduser"])){
 	    <div align="center">
 		    <h3>Report</h3>
 			<h5><?php echo $err_db; ?></h5>
-			<table>
+			<table id="tab">
 			    <thead>
 				    <th>Total Users</th>
 					<th>Total Male Users</th>

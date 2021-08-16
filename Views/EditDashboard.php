@@ -16,7 +16,7 @@ if(!isset($_SESSION["loggeduserid"])){
 	    <h3>Edit Dashboard</h3>
 		<fieldset>
 			<form action="" onsubmit="return validate()" method="post">
-				<table >
+				<table id="tab" >
 					<tr>
 					    <input type = "hidden" name = "pid" value="<?php echo $_SESSION["loggeduserid"];?>"/>
 						<td align="right">Name: </td>
@@ -36,7 +36,7 @@ if(!isset($_SESSION["loggeduserid"])){
 						<td><span id="err_phone"><?php echo $err_phone;?></span></td>
 					</tr>
 					<tr>
-						<td align="center" colspan="2"><input type="submit" name="updateDashboard" value="Update"></td>
+						<td align="center" colspan="2"><input class="btn-orange" type="submit" name="updateDashboard" value="Update"></td>
 					</tr>
 					<tr>
 						<td align="center" colspan="2"><span><?php echo $err_db;?></span></td>

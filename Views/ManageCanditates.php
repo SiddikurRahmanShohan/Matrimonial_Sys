@@ -10,13 +10,15 @@ if(!isset($_SESSION["loggeduser"])){
 <?php include '../Controllers/UsersControll.php'; ?>
 <?php $canditates = getCanditates(); ?>
 <html>
-    <head></head>
+    <head>
+	    <link rel="stylesheet" href="../CSS/masterCSS.css">
+	</head>
 	<boady>
 	    <div align="center">
 		    <h3>Canditates</h3>
-			<a href = "AddCandidate.php" >Add Canditate</a>
+			<a class="btn-orange" href = "AddCandidate.php" >Add Canditate</a>
 			<h5><?php echo $err_db; ?></h5>
-			<table>
+			<table id="tab">
 			    <thead>
 				    <th>SL#</th>
 					<th>Name</th>
@@ -30,8 +32,7 @@ if(!isset($_SESSION["loggeduser"])){
 					<th>Phone</th>
 					<th>Address</th>
 					<th>Marital Status</th>
-					<th></th>
-					<th></th>
+					<th>Action</th>
 					
 				</thead>
 				<tboady>
@@ -51,7 +52,7 @@ if(!isset($_SESSION["loggeduser"])){
 								echo "<td>".$c["phone"]."</td>";
 								echo "<td>".$c["address"]."</td>";
 								echo "<td>".$c["mstatus"]."</td>";
-								echo '<td><a href = "EditUser.php?id='.$c["id"].'">Edit/Delete</td>';
+								echo '<td><a class="btn-green" href = "EditUser.php?id='.$c["id"].'">Edit/Delete</td>';
 							echo "</tr>";
 							$i++;
 						}

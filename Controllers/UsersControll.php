@@ -33,6 +33,8 @@
 	$err_mesg="";
 	$npass="";
 	$err_npass="";
+	$regS="";
+	$err_regS="";
 	$hasError = false;
 	
 	function numCharCheck($pas){
@@ -477,6 +479,20 @@
 			$err_db = "User Invalid";
 		}
 	}
+	else if(isset($_POST["regSer"])){
+		
+		if(empty($_POST["regS"])){
+		    $err_regS = "Input Something!";
+			$hasError = true;
+	    }
+		else{
+		    $regS = $_POST["regS"];
+	    }
+		if(!$hasError){
+            setcookie("regser", $regS, time() + (86400 * 30), "/");
+		}
+	}
+	
 	}
 	
 	function insertCanditate($name,$dob,$uname,$fname,$mname,$mstat,$nId,$phone,$bg,$addrs,$gender,$pass){

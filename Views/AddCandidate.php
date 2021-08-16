@@ -11,10 +11,11 @@ if(!isset($_SESSION["loggeduserid"])){
 <html>
     <head>
 	    <script src="../JS/UsersValidate.js"></script>
+		<link rel="stylesheet" href="../CSS/masterCSS.css">
 	</head>
 	<body>
 	<div align="center">
-	<fieldset> 
+	<fieldset class="field"> 
 	<form action="" onsubmit="return validate()" method="post">
 	<table>
 		<tr>

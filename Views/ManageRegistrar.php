@@ -1,3 +1,4 @@
+
 <?php
  session_start();
 if(!isset($_SESSION["loggeduser"])){
@@ -10,13 +11,23 @@ if(!isset($_SESSION["loggeduser"])){
 <?php include '../Controllers/UsersControll.php'; ?>
 <?php $registrars = getRegistrars(); ?>
 <html>
-    <head></head>
+    <head>
+	    <link rel="stylesheet" href="../CSS/masterCSS.css">
+	</head>
 	<boady>
 	    <div align="center">
 		    <h3>Registrar</h3>
-			<a href = "AddRegistrar.php" >Add Registrar</a>
+			<a class="btn-orange" href = "AddRegistrar.php" >Add Registrar</a>
 			<h5><?php echo $err_db; ?></h5>
-			<table>
+			<form action="" onsubmit="return validate()" method="post">
+			<input type="text"  name="regS" placeholder="Search..." >
+			<input class="btn-green" type="submit" name="regSer" value="search">
+			<span id="err_regS"><?php echo $err_regS;?></span>
+	        <div>
+			    <p><?php if(isset($_COOKIE["regser"])) { echo "Previous Search: ".$_COOKIE["regser"]; }?></p>
+	        </div>
+			</form>
+			<table id="tab">
 			    <thead>
 				    <th>SL#</th>
 					<th>Name</th>
@@ -25,8 +36,8 @@ if(!isset($_SESSION["loggeduser"])){
 					<th>Phone</th>
 					<th>Address</th>
 					<th>LIC.</th>
-					<th></th>
-					<th></th>
+					<th>Message</th>
+					<th>Action</th>
 					
 				</thead>
 				<tboady>
@@ -41,8 +52,8 @@ if(!isset($_SESSION["loggeduser"])){
 								echo "<td>".$r["phone"]."</td>";
 								echo "<td>".$r["address"]."</td>";
 								echo "<td>".$r["lic"]."</td>";
-								echo '<td><a href = "Message.php?id='.$r["id"].'">Message</td>';
-								echo '<td><a href = "EditUser.php?id='.$r["id"].'">Edit/Delete</td>';
+								echo '<td><a class="btn-orange" href = "Message.php?id='.$r["id"].'">Message</td>';
+								echo '<td><a class="btn-green" href = "EditUser.php?id='.$r["id"].'">Edit/Delete</td>';
 							echo "</tr>";
 							$i++;
 						}

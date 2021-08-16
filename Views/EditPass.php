@@ -17,7 +17,7 @@ if(!isset($_SESSION["loggeduserid"])){
 	    <h3>Change Password</h3>
 		<fieldset>
 			<form action="" onsubmit="return validate()" method="post">
-				<table >
+				<table id="tab" >
 					<tr>
 						<td align="right">Old Password: </td>
 						<td><input type="password" id="oPass" name="oPass" value="<?php echo $opass;?>"></td>
@@ -37,7 +37,7 @@ if(!isset($_SESSION["loggeduserid"])){
 					</tr>
 					
 					<tr>
-						<td align="center" colspan="2"><input type="submit" name="chagePassword" value="Chage Password"></td>
+						<td align="center" colspan="2"><input class="btn-orange" type="submit" name="chagePassword" value="Chage Password"></td>
 					</tr>
 					<tr>
 						<td align="center" colspan="2"><span><?php echo $err_db;?></span></td>

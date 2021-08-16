@@ -3,9 +3,10 @@
 <html>
     <head>
 	    <script src="../JS/UsersValidate.js"></script>
+		<link rel="stylesheet" href="../CSS/masterCSS.css">
 	</head>
 	<body>
-	<fieldset>
+	<fieldset class="field">
 	<div align="center">
 	<form action="" onsubmit="return validate()" method="post">
 	<table>
@@ -24,12 +25,12 @@
 			<td><span id="err_pass"><?php echo $err_pass;?></span></td>
 					</tr>		
 		<tr>
-			<td align="center" colspan="2"><input type="submit" name="login" value="Login"></td>
+			<td align="center" colspan="2"><input class="btn-orange" type="submit" name="login" value="Login"></td>
 		</tr>
 		
 		<tr>
-		<td align ="left" colspan ="2"><a href="Candidatesregister.php">Register as Candidates</a></td>
-		<td align ="right" colspan ="2"><a href="AddRegistrarPage.php">Register as Registrar</a></td>
+		<td align ="left" colspan ="2"><a class="btn-blue" href="Candidatesregister.php">Register as Candidates</a></td>
+		<td align ="right" colspan ="2"><a class="btn-green" href="AddRegistrarPage.php">Register as Registrar</a></td>
 		</tr>
 		
 	</table>

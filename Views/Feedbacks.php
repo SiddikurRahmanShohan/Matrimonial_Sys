@@ -15,7 +15,7 @@ if(!isset($_SESSION["loggeduser"])){
 	    <div align="center">
 		    <h3>Feedbacks</h3>
 			<h5><?php echo $err_db; ?></h5>
-			<table>
+			<table id="tab">
 			    <thead>
 				    <th>SL#</th>
 					<th>Feedback</th>
