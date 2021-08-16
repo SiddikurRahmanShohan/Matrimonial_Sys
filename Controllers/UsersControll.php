@@ -363,7 +363,7 @@
 					header("Location: AdminHomePage.php");
 				}
 				else if($usr1["role"] == "user"){
-					
+					header("Location: candidateshome.php");
 				}
 				else if($usr1["role"] == "registrar"){
 					header("Location: RegistrarHomePage.php");

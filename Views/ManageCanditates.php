@@ -14,7 +14,7 @@ if(!isset($_SESSION["loggeduser"])){
 	<boady>
 	    <div align="center">
 		    <h3>Canditates</h3>
-			<a href = "Candidatesregister.php" >Add Canditate</a>
+			<a href = "AddCandidate.php" >Add Canditate</a>
 			<h5><?php echo $err_db; ?></h5>
 			<table>
 			    <thead>
