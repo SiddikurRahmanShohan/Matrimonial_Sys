@@ -9,7 +9,15 @@ if(!isset($_SESSION["loggeduser"])){
 <?php include 'MainHeader.php'; ?>
 <?php include 'AdminHeader.php'; ?>
 <?php include '../Controllers/UsersControll.php'; ?>
-<?php $registrars = getRegistrars(); ?>
+<?php 
+    if(isset($_COOKIE["regser"])){
+		$registrars = searchReg($_COOKIE["regser"]);
+	}
+	else{
+		$registrars = getRegistrars();
+	}
+     
+ ?>
 <html>
     <head>
 	    <link rel="stylesheet" href="../CSS/masterCSS.css">
@@ -18,6 +26,7 @@ if(!isset($_SESSION["loggeduser"])){
 	    <div align="center">
 		    <h3>Registrar</h3>
 			<a class="btn-orange" href = "AddRegistrar.php" >Add Registrar</a>
+			<a  class="btn-blue" href="Candidatesregister.php">Lic. Approve</a>
 			<h5><?php echo $err_db; ?></h5>
 			<form action="" onsubmit="return validate()" method="post">
 			<input type="text"  name="regS" placeholder="Search..." >

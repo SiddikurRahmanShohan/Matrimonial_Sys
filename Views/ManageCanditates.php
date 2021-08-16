@@ -11,6 +11,7 @@ if(!isset($_SESSION["loggeduser"])){
 <?php $canditates = getCanditates(); ?>
 <html>
     <head>
+	    <script src="../JS/Users.js"></script>
 	    <link rel="stylesheet" href="../CSS/masterCSS.css">
 	</head>
 	<boady>
@@ -18,6 +19,9 @@ if(!isset($_SESSION["loggeduser"])){
 		    <h3>Canditates</h3>
 			<a class="btn-orange" href = "AddCandidate.php" >Add Canditate</a>
 			<h5><?php echo $err_db; ?></h5>
+			<input type="text"  onkeyup="search(this)" placeholder="Search..." >
+	        <div id="suggestions">
+	        </div>
 			<table id="tab">
 			    <thead>
 				    <th>SL#</th>

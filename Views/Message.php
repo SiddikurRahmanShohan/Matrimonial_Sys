@@ -23,7 +23,7 @@ if(!isset($_SESSION["loggeduserid"])){
 				<?php
 						foreach($msgs as $m){
 							echo "<tr>";
-								echo "<td><textarea>".$m["message"]."</textarea></td>";
+								echo "<td><textarea readonly>".$m["message"]."</textarea></td>";
 								echo "<td>".$m["time"]."</td>";
 								echo "<td>".$m["date"]."</td>";
 							echo "</tr>";
@@ -37,10 +37,10 @@ if(!isset($_SESSION["loggeduserid"])){
 			<table align="center">
 					<tr>
 					    <input type = "hidden" name = "sid" value="<?php echo $_SESSION["loggeduserid"];?>"/>
+						<input type = "hidden" name = "sun" value="<?php echo $_SESSION["loggeduser"];?>"/>
 						<input type = "hidden" name = "rid" value="<?php echo $_GET["id"];?>"/>
 						<td align="right">Message: </td>
-						<?php $sname = $sender["uname"];?>
-						<td><textarea name="mesg"><?php echo $sname.":\n".$mesg;?></textarea></td>
+						<td><textarea name="mesg"></textarea></td>
 			            <td><span><?php echo $err_mesg;?></span></td>
 						
 					</tr>

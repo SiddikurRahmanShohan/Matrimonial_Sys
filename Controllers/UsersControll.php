@@ -467,29 +467,21 @@
 		    $mesg = $_POST["mesg"];
 	    }
 		if(!$hasError){
+			$mesg = $_POST["sun"].":\n".$mesg;
 			if(sendMessage($mesg,$_POST["rid"],$_POST["sid"],date("d/m/y"),date("h:i:sa"))){
-				$usr10 = getUser($_POST["sid"]);
-				if($usr10["role"]== 'admin'){
-					header("Location: ManageRegistrar.php");
-				}
-				else{
-					header("Location: ManageCanditates.php");
-				}
+				
 			}
 			$err_db = "User Invalid";
 		}
 	}
 	else if(isset($_POST["regSer"])){
 		
-		if(empty($_POST["regS"])){
-		    $err_regS = "Input Something!";
-			$hasError = true;
-	    }
-		else{
 		    $regS = $_POST["regS"];
-	    }
+			
 		if(!$hasError){
             setcookie("regser", $regS, time() + (86400 * 30), "/");
+			searchReg($regS);
+			header("Location: ManageRegistrar.php");
 		}
 	}
 	
@@ -616,6 +608,16 @@
 	function updatePass($id,$cpass){
 		$query = "update users set pass='$cpass' where id=$id";
 		$rs = execute($query);
+		return $rs;
+	}
+	function search($key){
+		$query = "select id,name from users where name like '%$key%' or uname like '%$key%' and role='user'";
+		$rs = get($query);
+		return $rs;
+	}
+	function searchReg($nam){
+		$query = "select * from users where name like '%$nam%' or uname like '%$nam%' and role='registrar'";
+		$rs = get($query);
 		return $rs;
 	}
 	
