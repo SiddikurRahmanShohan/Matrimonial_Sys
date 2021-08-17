@@ -7,6 +7,7 @@
 	    <div >
 		    <h3>Admin</h3>
 			<a class="btn-green" href = "AdminHomePage.php" >Home</a>
+			<a class="btn-orange" href="Dashboard.php">Dashboard</a>
 		</div>
 		<div class="btn-div"></div>
 		<div class="btn-div">

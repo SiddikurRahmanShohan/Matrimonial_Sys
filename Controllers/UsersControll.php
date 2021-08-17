@@ -510,6 +510,16 @@
 		}
 	}
 	
+	else if(isset($_POST["logout"])){
+		
+		if(!$hasError){
+				unset($_SESSION["loggeduser"]);
+				unset($_SESSION["loggeduserid"]);
+				header("Location: Login.php");
+			$err_db = "User Invalid";
+		}
+	}
+	
 	}
 	
 	function insertCanditate($name,$dob,$uname,$fname,$mname,$mstat,$nId,$phone,$bg,$addrs,$gender,$pass){

@@ -8,14 +8,17 @@ if(!isset($_SESSION["loggeduser"])){
 
 <?php include 'MainHeader.php'; ?>
 <?php include 'AdminHeader.php'; ?>
+<?php include '../Controllers/UsersControll.php'; ?>
 <html>
     <head>
 	    <link rel="stylesheet" href="../CSS/masterCSS.css">
 	</head>
 	<boady>
+	<form action="" method="post">
 	<div align="right">
-	    <a class="btn-orange" href="Dashboard.php">Dashboard</a>
+	    <input class="btn-blue" type="submit" name="logout" value="Logout">
 	</div>
+	</form>
 	    <div align="center">
 		<h2>Welcome, <?php echo $_SESSION["loggeduser"]; ?></p>
 		</div>

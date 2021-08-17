@@ -10,7 +10,9 @@ if(!isset($_SESSION["loggeduserid"])){
 <?php require '../Controllers/UsersControll.php'; ?>
 <?php $usr6 = getUser($_GET["id"]); ?>
 <html>
-	<head></head>
+	<head>
+	    <script src="../JS/UsersValidate.js"></script>
+	</head>
 	<body>
 	<div align="center">
 	    <h3>Edit User</h3>
@@ -21,7 +23,8 @@ if(!isset($_SESSION["loggeduserid"])){
 					    <input type = "hidden" name = "pid" value="<?php echo $_GET["id"];?>"/>
 						<td align="right">Name: </td>
 						<td><input type="text" id="name" name="name" value="<?php echo $usr6["name"];?>"></td>
-						<td><span id="err_name"><?php echo $err_name;?></span></td>
+						<td><span id="err_name"></span></td>
+			            <td><span ><?php echo $err_name;?></span></td>
 						
 					</tr>
 					<tr>
@@ -57,7 +60,6 @@ if(!isset($_SESSION["loggeduserid"])){
 			</form>
 		</fieldset>
 		</div>
-		<script src="../JS/UsersValidate.js"></script>
 	</body>
 	<?php include 'Footer.php'; ?>
 </html>
